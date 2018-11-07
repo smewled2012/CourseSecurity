@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <th:block th:insert="base :: header"></th:block>
+</head>
+
+
+<body>
+
+<nav th:replace="base :: nav"></nav>
+
+<div class="container">
+    <div class="jumbotron">
+
+        <form action="#" th:action="@{/process}" th:object="${course}" method="post">
+
+            <input type="hidden" th:field="*{id}">
+
+            Title:<br />
+            <input type="text" th:field="*{title}"/> <br/>
+            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span> <br/>
+            Instructor:<br />
+            <input type="text" th:field="*{instructor}"/> <br/>
+            <span th:if="${#fields.hasErrors('instructor')}" th:errors="*{instructor}"></span> <br/>
+            Description:<br />
+            <textarea rows="2" th:field="*{description}"/> <br/>
+            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span> <br/>
+            Credits:<br />
+            <input type="text" th:field="*{credit}"/> <br/>
+            <span th:if="${#fields.hasErrors('credit')}" th:errors="*{credit}"></span> <br/>
+            <br/>
+            <input type="submit" class="btn btn-info" value="Submit">
+        </form>
+
+
+    </div>
+</div>
+
+<nav th:replace="base :: footer"></nav>
+<th:block th:replace="base :: jslinks"></th:block>
+
+</body>
+</html>
