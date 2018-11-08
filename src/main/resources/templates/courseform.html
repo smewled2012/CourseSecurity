@@ -7,7 +7,7 @@
 </head>
 
 
-<body>
+<body  background="mont.jpg">
 
 <nav th:replace="base :: nav"></nav>
 
@@ -31,7 +31,10 @@
             <input type="text" th:field="*{credit}"/> <br/>
             <span th:if="${#fields.hasErrors('credit')}" th:errors="*{credit}"></span> <br/>
             <br/>
-            <input type="submit" class="btn btn-info" value="Submit">
+            <td>
+            <input type="submit" class="btn btn-large btn-success" value="Submit">
+            <input type="reset" class="btn btn-group-toggle" value="Reset">
+            </td>
         </form>
 
 
@@ -39,7 +42,6 @@
 </div>
 
 <nav th:replace="base :: footer"></nav>
-<th:block th:replace="base :: jslinks"></th:block>
 
 </body>
 </html>

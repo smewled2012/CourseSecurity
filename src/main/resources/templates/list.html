@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Home page </title>
@@ -8,7 +9,7 @@
 
 </head>
 
-<body>
+<body  background="mont.jpg">
 
 <div th:replace="base :: nav"></div>
 
@@ -26,7 +27,7 @@
                 <th>Title &nbsp;&nbsp;</th>
                 <th>Instructor&nbsp;&nbsp;</th>
                 <th>Credits&nbsp;&nbsp;</th>
-                <td>Actions&nbsp;&nbsp;</td>
+                <td>Actions&nbsp;&nbsp;&nbsp;</td>
             </tr>
 
             <tr th:each="course : ${courses}">
@@ -34,22 +35,25 @@
                 <td th:text="${course.instructor}"></td>
                 <td th:text="${course.credit}"></td>
                 <td>
-                    <a th:href="@{/update/{id}(id=${course.id})}"> <strong>Update</strong> </a>
-                    <a th:href="@{/detail/{id}(id=${course.id})}"> <strong>Details</strong> </a>
-                    <a th:href="@{/delete/{id}(id=${course.id})}"> <strong>Delete</strong> </a>
+
+                    <a th:href="@{/update/{id}(id=${course.id})}" class="btn btn-light" role="button" > <strong>Update</strong> </a>
+                    <a th:href="@{/detail/{id}(id=${course.id})}" class="btn btn-outline-success" role="button" > <strong>Details</strong> </a>
+
+                    <div sec:authorize="hasAuthority('ADMIN')">
+                    <a th:href="@{/delete/{id}(id=${course.id})}" class="btn btn-danger" role="button"> <strong>Delete</strong> </a>
+                    </div>
 
                 </td>
             </tr>
         </table>
+
         <div  class="aligntext-center">
             <td>
             <a href="/add" class="btn btn-success" role="button"> Add Course </a>
-            <a href="#" class="btn btn-success" role="button"> Registration </a>
-            <a href="#" class="btn btn-success" role="button"> Login </a>
+            <a href="/register" class="btn btn-success" role="button"> Registration </a>
+            <a href="/login" class="btn btn-success" role="button"> Login </a>
             </td>
         </div>
-
-
 
     </div>
 
@@ -57,7 +61,6 @@
 
 
 <nav th:replace="base :: footer"></nav>
-<th:block th:replace="base :: jslinks"></th:block>
 
 </body>
 
